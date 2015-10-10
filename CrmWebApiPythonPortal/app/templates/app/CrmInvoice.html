@@ -1,0 +1,33 @@
+﻿{% extends "app/layout.html" %}
+
+{% block content %}
+
+<h2>Invoice</h2>
+
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.0/bootstrap-table.min.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.0/bootstrap-table.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+	    var data = '{{data|safe}}';
+	    var jsonObj = $.parseJSON(data);    
+    });
+
+</script>
+
+<form action="" role="form" method="post">
+	{% csrf_token %}
+	<input id="invoiceid" type="text" value="{{invoiceid}}" class="hide"/>
+	<div class="form-group">
+		<label for="name">Name:</label>
+		<input id="name" type="text" value="{{name}}" class="form-control" disabled/>
+	</div>
+	<div class="form-group">
+		<label for="totalamount">Total Amount:</label>
+		<input id="totalamount" type="text" value="{{totalamount}}" class="form-control" disabled/>
+	</div>
+    {% if user.is_staff %}
+	<button type="submit" class="btn btn-default">Mark Paid In Full</button>
+    {% endif %}
+</form>
+
+{% endblock %}

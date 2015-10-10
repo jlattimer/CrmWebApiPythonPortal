@@ -1,0 +1,40 @@
+﻿{% extends "app/layout.html" %}
+
+{% block content %}
+
+<h2>Invoices</h2>
+
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.0/bootstrap-table.min.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.0/bootstrap-table.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+	    var data = '{{data|safe}}';
+	    var jsonObj = $.parseJSON(data);
+
+        $('#table').bootstrapTable({
+            data: jsonObj
+        });
+
+        $('#table').bootstrapTable('hideColumn', 'invoiceid');
+    });
+
+    function LinkFormatter(value, row, index) {
+        return "<a href='{% url 'CrmInvoice' %}?invoiceid=" + row.invoiceid + "'>" + row.name + "</a>";
+    }
+</script>
+
+<table id="table" data-height="299">
+    <thead>
+    <tr>
+	    <th data-field="invoiceid">Invoice Id</th>
+	    <th data-field="name" data-formatter="LinkFormatter">Name</th>
+	    <th data-field="totalamount@mscrm.formattedvalue">Total Amount</th>
+	    <th data-field="statecode@mscrm.formattedvalue">State</th>
+        <th data-field="statuscode@mscrm.formattedvalue">Status</th>
+    </tr>
+    </thead>
+</table>
+
+{% endblock %}
+

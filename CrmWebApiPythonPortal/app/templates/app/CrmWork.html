@@ -1,0 +1,14 @@
+﻿{% extends "app/layout.html" %}
+
+{% block content %}
+
+
+Help
+{{token}}
+<br/>
+{% if user.is_authenticated %}
+Authenticated
+{% endif %}
+
+{% endblock %}
+

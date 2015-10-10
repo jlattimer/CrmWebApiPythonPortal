@@ -1,0 +1,11 @@
+<ul class="nav navbar-nav navbar-right">
+	{% if user.is_authenticated %}
+        <li><span class="navbar-brand">Hello {{ user.first_name }} {{ user.last_name }}!</span></li>
+        <li><a href="{% url 'Logout' %}">Log out</a></li>	
+	{% else %}	
+        <li><a href="{% url 'CrmEmployeeLogin' %}">Employee Log in</a></li>
+	    <li><a href="{% url 'CrmCustomerLogin' %}">Customer Log in</a></li>
+    {% endif %}
+</ul>
+
+

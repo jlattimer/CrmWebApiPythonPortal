@@ -1,0 +1,44 @@
+﻿{% extends "app/layout.html" %}
+
+{% block content %}
+
+<h2>Open Tickets</h2>
+
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.0/bootstrap-table.min.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.0/bootstrap-table.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+
+		var data = '{{data|safe}}';
+		var jsonObj = $.parseJSON(data);
+
+		$('#table').bootstrapTable({
+			data: jsonObj
+		});
+
+		$('#table').bootstrapTable('hideColumn', 'IncidentId');
+	});
+
+	function LinkFormatter(value, row, index) {
+		return "<a href='{% url 'CrmTicket' %}?ticketid=" + row.IncidentId + "'>" + row.TicketNumber + "</a>";
+	}
+</script>
+
+{% if not user.is_staff %}
+<a class="btn btn-default" href="{% url 'CrmTicket' %}">New Ticket &raquo;</a>
+{% endif %}
+<br/>
+<br/>
+<table id="table" data-height="299">
+    <thead>
+    <tr>
+	    <th data-field="IncidentId">Incident Id</th>
+	    <th data-field="TicketNumber" data-formatter="LinkFormatter">Ticket Number</th>
+	    <th data-field="CustomerId.Name">Customer</th>
+	    <th data-field="Title">Title</th>
+    </tr>
+    </thead>
+</table>
+
+{% endblock %}
+

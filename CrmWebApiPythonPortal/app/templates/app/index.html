@@ -1,0 +1,48 @@
+{% extends "app/layout.html" %}
+
+{% block content %}
+
+<div class="jumbotron">
+    <h1>Django</h1>
+    <p class="lead">Django is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
+	<p><a href="https://www.djangoproject.com/" class="btn btn-primary btn-large">Learn more &raquo;</a>
+	</p>
+	<p>
+		TODO:
+		<ul>
+			<li>Django Sync DB</li>
+			<li>Edit settings.py and update the CONSTANTS to point to your org./application</li>
+			<li>Create username & password fields on Contact & update Views.py -> CrmValidateLoginWebApi</li>
+		</ul>
+	</p>
+</div>
+
+<div class="row">
+	<div class="col-md-4">
+        <h2>CRM Web API</h2>
+		<p>
+			We're introducing a new API that will make it easier to create applications across a wide variety of
+			platforms, devices, and programming languages. This new Web API is available as a preview feature to 
+            Microsoft Dynamics CRM Online organizations that use Dynamics CRM Online 2015 Update 1.
+		</p>
+        <p><a class="btn btn-default" href="https://msdn.microsoft.com/en-us/dynamics/crm/webapipreview.aspx">Learn more &raquo;</a></p>
+    </div>
+	<div class="col-md-4">
+		{% if user.is_authenticated %}
+		<h2>Tickets</h2>
+		<p>The Python Package Index is a repository of software for the Python programming language.</p>
+		<p><a class="btn btn-default" href="{% url 'CrmTickets' %}">View Now &raquo;</a>
+		</p>
+        {% endif %}
+	</div>
+	<div class="col-md-4">
+		{% if user.is_authenticated %}
+		<h2>Invoices</h2>
+		<p>You can easily publish to Microsoft Azure using Python Tools for Visual Studio. Find out how you can host your application using a free trial today.</p>
+        <p><a class="btn btn-default" href="{% url 'CrmInvoices' %}">View Now &raquo;</a>
+		</p>
+        {% endif %}
+	</div>
+</div>
+
+{% endblock %}
